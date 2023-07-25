@@ -63,7 +63,7 @@ public class MainFrame extends JFrame {
 		p1.setBounds(0, 0, 1280, 720);//페이지1의 위치 설정
 		p1.setLayout(null);//레이아웃 설정
 		add(p1);
-			
+			  
 		setSize(1280, 720);
 		setLocationRelativeTo(null);
 		setVisible(true);
