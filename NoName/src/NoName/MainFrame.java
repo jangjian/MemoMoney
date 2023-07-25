@@ -36,7 +36,7 @@ public class MainFrame extends JFrame {
 		
 		/* TextField 크기 & 위치 */
 		id.setBounds(510, 462, 200, 30);
-		pw.setBounds(510, 502, 200, 30);
+		pw.setBounds(510, 502, 200, 30);   
 		
 		/* TextField 편집 */
 		id.setEditable(true); 
