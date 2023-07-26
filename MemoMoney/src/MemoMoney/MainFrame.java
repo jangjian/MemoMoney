@@ -14,7 +14,6 @@ public class MainFrame extends JFrame {
 	/* Button */
 	JButton loginBtn = new JButton("로그인");
 	JButton joinBtn = new JButton("회원가입");
-	JButton exitBtn = new JButton("프로그램 종료");
 	
 	static JPanel p1 = new JPanel() {
 		Image background = new ImageIcon(MainFrame.class.getResource("../Image/Login.png")).getImage(); 
@@ -29,6 +28,8 @@ public class MainFrame extends JFrame {
 	
 	MainFrame(Operator _o){
 		o = _o;
+		
+		setTitle("MemoMoney");
 		
 		/* TextField 크기 작업 */
 		id.setPreferredSize(new Dimension(140, 30));
@@ -49,17 +50,18 @@ public class MainFrame extends JFrame {
 		p1.add(id);
 		p1.add(pw);
 		
-		/* Button 크기 작업 */
-		loginBtn.setPreferredSize(new Dimension(75, 63));
-		joinBtn.setPreferredSize(new Dimension(135, 25));
-		exitBtn.setPreferredSize(new Dimension(135, 25));
-		
 		/* Button 이벤트 리스너 추가 */
 		ButtonListener bl = new ButtonListener();
-		
 		loginBtn.addActionListener(bl);
-		exitBtn.addActionListener(bl);
 		joinBtn.addActionListener(bl);
+		
+		loginBtn.setLayout(null);
+		loginBtn.setBounds(755,452,85,85);
+		joinBtn.setLayout(null);
+		joinBtn.setBounds(755,548,85,42);
+		
+		p1.add(loginBtn);
+		p1.add(joinBtn);
 		
 		p1.setBounds(0, 0, 1280, 720);//페이지1의 위치 설정
 		p1.setLayout(null);//레이아웃 설정
