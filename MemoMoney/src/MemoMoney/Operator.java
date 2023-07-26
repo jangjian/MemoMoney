@@ -11,4 +11,3 @@ public class Operator {
 		opt.mf = new MainFrame(opt);
 	}  
 }
-  

@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
 	JButton exitBtn = new JButton("프로그램 종료");
 	
 	static JPanel p1 = new JPanel() {
-		Image background = new ImageIcon(MainFrame.class.getResource("../Image/002.png")).getImage(); 
+		Image background = new ImageIcon(MainFrame.class.getResource("../Image/Login.png")).getImage(); 
 		public void paintComponent(Graphics g) { 
 			g.drawImage(background, 0, 0, null);
 			setOpaque(false); 
