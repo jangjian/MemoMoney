@@ -1,7 +1,7 @@
 package MemoMoney;
 
 public class Operator {
-	Database db = null;
+	Database db = null;    
 	MainFrame mf = null;
 	
 	public static void main(String[] args) {

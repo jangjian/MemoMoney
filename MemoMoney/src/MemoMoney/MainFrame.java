@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
 	static JPanel p1 = new JPanel() {
 		Image background = new ImageIcon(MainFrame.class.getResource("../Image/Login.png")).getImage(); 
 		public void paintComponent(Graphics g) { 
-			g.drawImage(background, 0, 0, null);
+			g.drawImage(background, 0, 0, null);  
 			setOpaque(false); 
 			super.paintComponent(g);
 		}
