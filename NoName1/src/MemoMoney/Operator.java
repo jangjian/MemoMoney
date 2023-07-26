@@ -1,13 +1,14 @@
-package NoName1;
+package MemoMoney;
 
-import NoName1.MainFrame;
-import NoName1.Operator;
+import MemoMoney.MainFrame;
+import MemoMoney.Operator;
 
 public class Operator {
 	MainFrame mf = null;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) {   
 		Operator opt = new Operator();
 		opt.mf = new MainFrame(opt);
 	}  
 }
+  

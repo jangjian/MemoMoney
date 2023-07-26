@@ -1,4 +1,4 @@
-package NoName1;
+package MemoMoney;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
 	
 	static JPanel p1 = new JPanel() {
 		Image background = new ImageIcon(MainFrame.class.getResource("../Image/002.png")).getImage(); 
-		public void paintComponent(Graphics g) {
+		public void paintComponent(Graphics g) { 
 			g.drawImage(background, 0, 0, null);
 			setOpaque(false); 
 			super.paintComponent(g);
