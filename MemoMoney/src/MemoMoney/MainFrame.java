@@ -12,8 +12,8 @@ public class MainFrame extends JFrame {
 	JPasswordField pw = new JPasswordField();
 	
 	/* Button */
-	JButton loginBtn = new JButton("로그인");
-	JButton joinBtn = new JButton("회원가입");
+	JButton loginBtn = new JButton();
+	JButton joinBtn = new JButton();
 	
 	static JPanel p1 = new JPanel() {
 		Image background = new ImageIcon(MainFrame.class.getResource("../Image/Login.png")).getImage(); 
@@ -23,6 +23,10 @@ public class MainFrame extends JFrame {
 			super.paintComponent(g);
 		}
 	};
+	
+	ImageIcon loginbtn = new ImageIcon(MainFrame.class.getResource("../Image/login_btn.png"));
+	ImageIcon joinbtn = new ImageIcon(MainFrame.class.getResource("../Image/signup_btn.png"));
+	
 	
 	Operator o = null;
 	
@@ -56,9 +60,18 @@ public class MainFrame extends JFrame {
 		joinBtn.addActionListener(bl);
 		
 		loginBtn.setLayout(null);
-		loginBtn.setBounds(755,452,85,85);
+		loginBtn.setBounds(755,451,85,85);
 		joinBtn.setLayout(null);
-		joinBtn.setBounds(755,548,85,42);
+		joinBtn.setBounds(755,544,85,42);
+		
+		loginBtn.setIcon(loginbtn);
+		joinBtn.setIcon(joinbtn);
+		
+		loginBtn.setContentAreaFilled(false);
+		joinBtn.setContentAreaFilled(false);
+		
+		loginBtn.setBorderPainted(false);
+		joinBtn.setBorderPainted(false);
 		
 		p1.add(loginBtn);
 		p1.add(joinBtn);
@@ -87,32 +100,26 @@ public class MainFrame extends JFrame {
 				upass = upass + pw.getPassword()[i];
 			}
 			
-			/* 프로그램 종료 버튼 이벤트 */
-			if(b.getText().equals("프로그램 종료")) {
-				System.out.println("프로그램 종료");
-				System.exit(0);
-			}
-			
 			/* 회원가입 버튼 이벤트 */
-			else if(b.getText().equals("회원가입")) {
+			if(e.getSource()==joinBtn) {
 				
 			}
 			
 			/* 로그인 버튼 이벤트 */
-			else if(b.getText().equals("로그인")) {
+			else if(e.getSource()==loginBtn) {
 				if(uid.equals("") || upass.equals("")) {
 					JOptionPane.showMessageDialog(null, "아이디와 비밀번호 모두 입력해주세요", "로그인 실패", JOptionPane.ERROR_MESSAGE);
 					System.out.println("로그인 실패 > 로그인 정보 미입력");
 				}
 				
 				else if(uid != null && upass != null) {
-//					if(o.db.logincheck(uid, upass)) {	//이 부분이 데이터베이스에 접속해 로그인 정보를 확인하는 부분이다.
-//						System.out.println("로그인 성공");
-//						JOptionPane.showMessageDialog(null, "로그인에 성공하였습니다");
-//					} else {
-//						System.out.println("로그인 실패 > 로그인 정보 불일치");
-//						JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다");
-//					}
+					if(o.db.logincheck(uid, upass)) {	//이 부분이 데이터베이스에 접속해 로그인 정보를 확인하는 부분이다.
+						System.out.println("로그인 성공");
+						JOptionPane.showMessageDialog(null, "로그인에 성공하였습니다");
+					} else {
+						System.out.println("로그인 실패 > 로그인 정보 불일치");
+						JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다");
+					}
 				}
 			}
 		}
