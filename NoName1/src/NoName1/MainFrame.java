@@ -1,4 +1,4 @@
-package NoName;
+package NoName1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
 	JButton exitBtn = new JButton("프로그램 종료");
 	
 	static JPanel p1 = new JPanel() {
-		Image background = new ImageIcon(MainFrame.class.getResource("../Image/test.jpg")).getImage(); 
+		Image background = new ImageIcon(MainFrame.class.getResource("../Image/002.png")).getImage(); 
 		public void paintComponent(Graphics g) {
 			g.drawImage(background, 0, 0, null);
 			setOpaque(false); 
@@ -35,14 +35,15 @@ public class MainFrame extends JFrame {
 		pw.setPreferredSize(new Dimension(140, 30));
 		
 		/* TextField 크기 & 위치 */
-		id.setBounds(510, 462, 200, 30);
-		pw.setBounds(510, 502, 200, 30);   
+		id.setBounds(530, 472, 200, 30);
+		pw.setBounds(530, 532, 200, 30);
 		
 		/* TextField 편집 */
 		id.setEditable(true); 
 		id.setFont(new Font("Arial", Font.BOLD, 18));
 		pw.setEditable(true); 
 		pw.setFont(new Font("Arial", Font.BOLD, 18));
+		id.setBackground(Color.getColor(getName()));
 		
 		/* TextField 추가 */
 		p1.add(id);
