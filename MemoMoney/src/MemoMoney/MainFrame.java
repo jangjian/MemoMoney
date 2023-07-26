@@ -7,14 +7,6 @@ import java.awt.event.*;
 
 public class MainFrame extends JFrame {
 	
-	/* TextField */
-	JTextField id = new JTextField();
-	JPasswordField pw = new JPasswordField();
-	
-	/* Button */
-	JButton loginBtn = new JButton();
-	JButton joinBtn = new JButton();
-	
 	static JPanel p1 = new JPanel() {
 		Image background = new ImageIcon(MainFrame.class.getResource("../Image/Login.png")).getImage(); 
 		public void paintComponent(Graphics g) { 
@@ -23,6 +15,16 @@ public class MainFrame extends JFrame {
 			super.paintComponent(g);
 		}
 	};
+	
+	/* TextField */
+	JTextField id = new JTextField();
+	JPasswordField pw = new JPasswordField();
+	
+	/* Button */
+	JButton loginBtn = new JButton();
+	JButton joinBtn = new JButton();
+	
+	
 	
 	ImageIcon loginbtn = new ImageIcon(MainFrame.class.getResource("../Image/login_btn.png"));
 	ImageIcon joinbtn = new ImageIcon(MainFrame.class.getResource("../Image/signup_btn.png"));
@@ -34,10 +36,6 @@ public class MainFrame extends JFrame {
 		o = _o;
 		
 		setTitle("MemoMoney");
-		
-		/* TextField 크기 작업 */
-		id.setPreferredSize(new Dimension(140, 30));
-		pw.setPreferredSize(new Dimension(140, 30));
 		
 		/* TextField 크기 & 위치 */
 		id.setBounds(530, 472, 200, 30);
