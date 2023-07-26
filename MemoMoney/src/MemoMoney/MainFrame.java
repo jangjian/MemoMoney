@@ -76,7 +76,6 @@ public class MainFrame extends JFrame {
 		p1.add(loginBtn);
 		p1.add(joinBtn);
 		
-		p1.setBounds(0, 0, 1280, 720);//페이지1의 위치 설정
 		p1.setLayout(null);//레이아웃 설정
 		add(p1);   
 			  
@@ -102,7 +101,7 @@ public class MainFrame extends JFrame {
 			
 			/* 회원가입 버튼 이벤트 */
 			if(e.getSource()==joinBtn) {
-				
+				o.jf.setVisible(true);
 			}
 			
 			/* 로그인 버튼 이벤트 */

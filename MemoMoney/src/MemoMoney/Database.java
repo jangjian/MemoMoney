@@ -48,22 +48,24 @@ public class Database {
 		}		
 		return flag;
 	}
-	boolean joinCheck(String _i, String _p) {
+	boolean joinCheck(String _i, String _p, String _n) {
 		boolean flag = false;
 		
 		String id = _i;
 		String pw = _p;
-		
-		try { //member 테이블에서 id, pw를 조회
-			String insertStr = "INSERT INTO member VALUES('" + id + "', '" + pw + "')";
+		String name = _n;
+			
+		try {
+			String insertStr = "INSERT INTO member VALUES('" + id + "', '" + pw + "', '" + name + "')";
 			stmt.executeUpdate(insertStr);
-
+				
 			flag = true;
-			System.out.println("회원가입 성공"); //정보를 다 입력하면 회원가입 성공
+			System.out.println("회원가입 성공");
 		} catch(Exception e) {
 			flag = false;
-			System.out.println("회원가입 실패 > " + e.toString()); //아니면 오류메시지 출력
-		}			
+			System.out.println("회원가입 실패 > " + e.toString());
+		}
+			
 		return flag;
 	}
 }
