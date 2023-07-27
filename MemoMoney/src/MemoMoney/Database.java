@@ -5,7 +5,7 @@ import java.sql.*;
 public class Database {
 	Connection con = null;
 	Statement stmt = null;
-	String url = "jdbc:mysql://localhost/memomoney?autoReconnection=true&serverTimezone=Asia/Seoul";	
+	String url = "jdbc:mysql://localhost/memomoney?serverTimezone=Asia/Seoul";	
 	String user = "root";
 	String passwd = "1011";	
 
@@ -34,11 +34,9 @@ public class Database {
 			while(result.next()) {
 				if(pw.equals(result.getString("password"))) { //입력한 password와 db의 password를 비교
 					flag = true;
-					System.out.println("로그인 성공");					
 				}	
 				else {
 					flag = false;
-					System.out.println("로그인 실패");
 				}
 				count++;
 			}
@@ -56,11 +54,10 @@ public class Database {
 		String name = _n;
 			
 		try {
-			String insertStr = "INSERT INTO member VALUES('" + id + "', '" + pw + "', '" + name + "')";
+			String insertStr = "INSERT INTO member VALUES('" + name + "', '" + pw + "', '" + id + "')";
 			stmt.executeUpdate(insertStr);
 				
 			flag = true;
-			System.out.println("회원가입 성공");
 		} catch(Exception e) {
 			flag = false;
 			System.out.println("회원가입 실패 > " + e.toString());

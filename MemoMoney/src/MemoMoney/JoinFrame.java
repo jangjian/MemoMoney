@@ -56,33 +56,23 @@ public class JoinFrame extends JFrame {
 		
 		pwcBtn.setBorderPainted(false);
 		joinBtn.setBorderPainted(false);
-
+		
 	
 		/* Panel 추가 작업 */
-	
 		join_p.add(name);
-		
 		join_p.add(id);
-		
 		join_p.add(pw);
-		
 		join_p.add(pwc);
-		
 		join_p.add(pwcBtn);
-		
 		join_p.add(joinBtn);
-		
 		join_p.setLayout(null);//레이아웃 설정
 		add(join_p);  
 		
 		
 		/* Button 이벤트 리스너 추가 */
 		ButtonListener bl = new ButtonListener();
-		
 		joinBtn.addActionListener(bl);
 		pwcBtn.addActionListener(bl);
-		
-		
 		
 		setSize(250, 300);
 		setLocationRelativeTo(null);
@@ -98,6 +88,8 @@ public class JoinFrame extends JFrame {
 			/* TextField에 입력된 회원 정보들을 변수에 초기화 */
 			String uid = name.getText();
 			String uid1 = id.getText();
+			String pass = pw.getText();
+			String passC = pwc.getText();
 			String upass = "";
 			for(int i=0; i<pw.getPassword().length; i++) {
 				upass = upass + pw.getPassword()[i];
@@ -105,30 +97,30 @@ public class JoinFrame extends JFrame {
 			
 			/* 비밀번호 확인 버튼 이벤트 */
 			if(e.getSource()==pwcBtn) {
-				if(pwc.equals(" ")) {
+				if(passC.equals(" ")) {
 					JOptionPane.showMessageDialog(null, "비교할 비밀번호를 입력해 주시기 바랍니다");
-				} else if(!pw.equals(pwc)) {
+				} else if(!pass.equals(passC)) {
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다");
+				} else if(pass.equals(passC)) {
+					JOptionPane.showMessageDialog(null, "비밀번호가 일치합니다.");
 				}
 			}
 			
 			
 			/* 가입하기 버튼 이벤트 */
 			else if(e.getSource()==joinBtn) {
-				if(uid.equals("") || upass.equals("")|| uid1.equals("")||pwc.equals("")) {
+				if(uid.equals("") || upass.equals("")|| uid1.equals("")||passC.equals("")) {
 					JOptionPane.showMessageDialog(null, "모든 정보를 기입해주세요", "회원가입 실패", JOptionPane.ERROR_MESSAGE);
 					System.out.println("회원가입 실패 > 회원정보 미입력");
-				}else if(!pw.equals(pwc)) {
+				}else if(!pass.equals(passC)) {
 					JOptionPane.showMessageDialog(null, "비밀번호를 확인해주세요");
 				}
 				
-				else if(!uid.equals("") && !upass.equals("")&& !uid1.equals("")&& !pwc.equals("")) {
+				else if(!uid.equals("") && !upass.equals("")&& !uid1.equals("")&& !passC.equals("")) {
 					if(o.db.joinCheck(uid, upass, uid1)) {
-						System.out.println("회원가입 성공");
 						JOptionPane.showMessageDialog(null, "회원가입에 성공하였습니다");
 						dispose();
 					}else {
-						System.out.println("회원가입 실패");
 						JOptionPane.showMessageDialog(null, "회원가입에 실패하였습니다");
 						id.setText("");
 						pw.setText("");

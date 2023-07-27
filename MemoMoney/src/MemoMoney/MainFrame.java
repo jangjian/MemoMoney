@@ -7,6 +7,7 @@ import java.awt.event.*;
 
 public class MainFrame extends JFrame {
 	
+	/* Page Image */
 	static JPanel p1 = new JPanel() {
 		Image background = new ImageIcon(MainFrame.class.getResource("../Image/Login.png")).getImage(); 
 		public void paintComponent(Graphics g) { 
@@ -24,8 +25,7 @@ public class MainFrame extends JFrame {
 	JButton loginBtn = new JButton();
 	JButton joinBtn = new JButton();
 	
-	
-	
+	/* Button Image */
 	ImageIcon loginbtn = new ImageIcon(MainFrame.class.getResource("../Image/login_btn.png"));
 	ImageIcon joinbtn = new ImageIcon(MainFrame.class.getResource("../Image/signup_btn.png"));
 	
@@ -62,13 +62,13 @@ public class MainFrame extends JFrame {
 		joinBtn.setLayout(null);
 		joinBtn.setBounds(755,544,85,42);
 		
-		loginBtn.setIcon(loginbtn);
+		loginBtn.setIcon(loginbtn);	// 버튼 이미지
 		joinBtn.setIcon(joinbtn);
 		
-		loginBtn.setContentAreaFilled(false);
+		loginBtn.setContentAreaFilled(false);	//버튼 투명하게
 		joinBtn.setContentAreaFilled(false);
 		
-		loginBtn.setBorderPainted(false);
+		loginBtn.setBorderPainted(false);	// 버튼 라인 없애기
 		joinBtn.setBorderPainted(false);
 		
 		p1.add(loginBtn);
