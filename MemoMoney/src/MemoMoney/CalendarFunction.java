@@ -1,7 +1,6 @@
 package MemoMoney;
 
 import java.util.Calendar;
-
 import javax.swing.JButton;
 
 public class CalendarFunction {
@@ -53,5 +52,4 @@ public class CalendarFunction {
 		calSet();
 	}		
 }
-
 

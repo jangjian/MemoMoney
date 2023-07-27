@@ -10,7 +10,15 @@ import javax.swing.*;
 import MemoMoney.CalendarFunction;
 
 class Calendarmain extends JFrame implements ActionListener{
-	static JPanel bg = new JPanel() {
+	static JPanel day = new JPanel() {
+		Image background = new ImageIcon(MainFrame.class.getResource("../Image/Calendar_p.png")).getImage(); 
+		public void paintComponent(Graphics g) { 
+			g.drawImage(background, 0, 0, null);
+			setOpaque(false); 
+			super.paintComponent(g);
+		}
+	};
+	static JPanel day1 = new JPanel() {
 		Image background = new ImageIcon(MainFrame.class.getResource("../Image/Calendar_p.png")).getImage(); 
 		public void paintComponent(Graphics g) { 
 			g.drawImage(background, 0, 0, null);
@@ -19,70 +27,77 @@ class Calendarmain extends JFrame implements ActionListener{
 		}
 	};
 	
+	ImageIcon dBtn = new ImageIcon(MainFrame.class.getResource("../Image/test.png"));
+
 	Container container = getContentPane();
 	
-	JButton buttonBefore = new JButton("Before");
-	JButton buttonAfter = new JButton("After");
+	JButton beforeBtn = new JButton("Before");
+	JButton afterBtn = new JButton("After");
 	
 	JLabel label = new JLabel("00년 0월");
 	
-	JButton[] buttons = new JButton[49];
+	JButton[] dayBtn = new JButton[49];
 	String[] dayNames = {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
 	
 	CalendarFunction cF = new CalendarFunction();
 	
 	public Calendarmain() {
-		bg.setLayout(null);//레이아웃 설정
-		add(bg);   
-		
 		setTitle("만년 달력");
 		setSize(1280, 720);
-		setLocation(0, 0);
 		init();
 		start();
 		setVisible(true);
 	}
 	private void init() {
+		container.setLayout(new BorderLayout());
+		container.add("North", day);
+		day.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
+		day1.setBorder(BorderFactory.createEmptyBorder(30,100,50,100));
+		container.add("Center", day1);
 		 
-		 bg.setLayout(new FlowLayout());
-		 bg.add(buttonBefore);
-		 bg.add(label);
-		 bg.add(buttonAfter);
+		day.setLayout(new FlowLayout());
+		day.add(afterBtn);
+		day.add(label);
+		day.add(beforeBtn);
 		 
-		 Font font = new Font("SansSerif", Font.BOLD, 20);
-		 buttonAfter.setFont(font);
-		 buttonBefore.setFont(font);
-		 label.setFont(font);
+		
+		
+		Font font = new Font("SansSerif", Font.BOLD, 35);
+		afterBtn.setFont(font);
+		beforeBtn.setFont(font);
+		label.setFont(font);
 		 
-		 label.setText(cF.getCalText());
+		label.setText(cF.getCalText());
 		 
-		 bg.setLayout(new GridLayout(7, 7, 5, 5));
-		 for(int i = 0; i < buttons.length; i++) {
-			 buttons[i] = new JButton();
-			 bg.add(buttons[i]);
+		day1.setLayout(new GridLayout(7, 7, 10, 10));
+	    for(int i = 0; i < dayBtn.length; i++) {
+	    	dayBtn[i] = new JButton();
+			day1.add(dayBtn[i]);
 			 
-			 buttons[i].setFont(new Font("SansSerif", Font.BOLD, 24));
+			dayBtn[i].setContentAreaFilled(false);
 			 
-			 if(i < 7) buttons[i].setText(dayNames[i]); 
+			 if(i < 7) dayBtn[i].setText(dayNames[i]); 
 			 
-			 if(i%7 == 0) buttons[i].setForeground(Color.RED);
-			 if(i%7 == 6) buttons[i].setForeground(Color.BLUE);
-		 }
-		 cF.setButtons(buttons);
-		 cF.calSet();
+			if(i%7 == 0) dayBtn[i].setForeground(Color.RED);
+			if(i%7 == 6) dayBtn[i].setForeground(Color.BLUE);
+		}
+		 
+			
+		cF.setButtons(dayBtn);
+		cF.calSet();
 	}
 
 	private void start() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		buttonAfter.addActionListener(this);
-		buttonBefore.addActionListener(this);
+		afterBtn.addActionListener(this);
+		beforeBtn.addActionListener(this);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int gap = 0;
-		if(e.getSource() == buttonAfter) {				// 1달 후
+		if(e.getSource() == afterBtn) {				// 1달 후
 			gap = 1;
-		} else if(e.getSource() == buttonBefore ) {		// 1달 전
+		} else if(e.getSource() == beforeBtn ) {		// 1달 전
 			gap = -1;
 		}
 		cF.allInit(gap);
