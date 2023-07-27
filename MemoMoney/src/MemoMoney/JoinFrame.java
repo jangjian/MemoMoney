@@ -30,6 +30,7 @@ public class JoinFrame extends JFrame {
 	JButton joinBtn = new JButton();
 	JButton pwcBtn = new JButton();
 	
+	
 	Operator o = null;
 	
 	JoinFrame(Operator _o) {
