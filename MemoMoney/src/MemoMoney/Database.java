@@ -34,6 +34,7 @@ public class Database {
 			while(result.next()) {
 				if(pw.equals(result.getString("password"))) { //입력한 password와 db의 password를 비교
 					flag = true;
+					
 				}	
 				else {
 					flag = false;

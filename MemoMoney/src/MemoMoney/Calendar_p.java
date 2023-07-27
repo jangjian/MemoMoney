@@ -26,48 +26,66 @@ class Calendarmain extends JFrame implements ActionListener{
 			super.paintComponent(g);
 		}
 	};
-	
-	ImageIcon dBtn = new ImageIcon(MainFrame.class.getResource("../Image/test.png"));
 
 	Container container = getContentPane();
 	
-	JButton beforeBtn = new JButton("Before");
-	JButton afterBtn = new JButton("After");
+	JButton beforeBtn = new JButton();
+	JButton afterBtn = new JButton();
 	
 	JLabel label = new JLabel("00년 0월");
 	
 	JButton[] dayBtn = new JButton[49];
-	String[] dayNames = {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
+	
+	ImageIcon bBtn = new ImageIcon(MainFrame.class.getResource("../Image/before.png"));
+	ImageIcon aBtn = new ImageIcon(MainFrame.class.getResource("../Image/after.png"));
 	
 	CalendarFunction cF = new CalendarFunction();
 	
 	public Calendarmain() {
-		setTitle("만년 달력");
+		setTitle("MemoMoney");
 		setSize(1280, 720);
 		init();
 		start();
+		setLocationRelativeTo(null);
 		setVisible(true);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	private void init() {
 		container.setLayout(new BorderLayout());
 		container.add("North", day);
+		container.add("Center", day1);
+		
+		/* 공백 추가 */
 		day.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
 		day1.setBorder(BorderFactory.createEmptyBorder(30,100,50,100));
-		container.add("Center", day1);
 		 
 		day.setLayout(new FlowLayout());
-		day.add(afterBtn);
-		day.add(label);
 		day.add(beforeBtn);
-		 
-		
+		day.add(label);
+		day.add(afterBtn);
 		
 		Font font = new Font("SansSerif", Font.BOLD, 35);
-		afterBtn.setFont(font);
-		beforeBtn.setFont(font);
 		label.setFont(font);
-		 
+		
+		/* 버튼 이미지 추가 */
+		beforeBtn.setIcon(bBtn);
+		afterBtn.setIcon(aBtn);
+		
+		/* 버튼 투명하게 */
+		beforeBtn.setContentAreaFilled(false);
+		afterBtn.setContentAreaFilled(false);
+		
+		/* 버튼 외곽선 삭제 */
+		beforeBtn.setBorderPainted(false);
+		afterBtn.setBorderPainted(false);
+		
+		/* 선택 됐을 때 버튼 외곽선 삭제 */
+		beforeBtn.setFocusPainted(false);
+		afterBtn.setFocusPainted(false);
+		
 		label.setText(cF.getCalText());
+		
 		 
 		day1.setLayout(new GridLayout(7, 7, 10, 10));
 	    for(int i = 0; i < dayBtn.length; i++) {
@@ -75,14 +93,13 @@ class Calendarmain extends JFrame implements ActionListener{
 			day1.add(dayBtn[i]);
 			 
 			dayBtn[i].setContentAreaFilled(false);
-			 
-			 if(i < 7) dayBtn[i].setText(dayNames[i]); 
+			dayBtn[i].setBorderPainted(false);
+			dayBtn[i].setFocusPainted(false);
 			 
 			if(i%7 == 0) dayBtn[i].setForeground(Color.RED);
 			if(i%7 == 6) dayBtn[i].setForeground(Color.BLUE);
 		}
-		 
-			
+
 		cF.setButtons(dayBtn);
 		cF.calSet();
 	}
