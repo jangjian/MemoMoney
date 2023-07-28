@@ -94,12 +94,7 @@ class Calendarmain extends JFrame implements ActionListener{
 			 
 			dayBtn[i].setContentAreaFilled(false);
 			dayBtn[i].setBorderPainted(false);
-			dayBtn[i].setFocusPainted(false);
-			 
-			if(i%7 == 0) dayBtn[i].setForeground(Color.RED);
-			if(i%7 == 6) dayBtn[i].setForeground(Color.BLUE);
 		}
-
 		cF.setButtons(dayBtn);
 		cF.calSet();
 	}
@@ -108,6 +103,9 @@ class Calendarmain extends JFrame implements ActionListener{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		afterBtn.addActionListener(this);
 		beforeBtn.addActionListener(this);
+		for(int i = 0; i < dayBtn.length; i++) {
+			dayBtn[i].addActionListener(this);
+		}
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -116,6 +114,9 @@ class Calendarmain extends JFrame implements ActionListener{
 			gap = 1;
 		} else if(e.getSource() == beforeBtn ) {		// 1달 전
 			gap = -1;
+		
+		}else if(e.getSource() == dayBtn) {
+			System.out.println("클릭됨");
 		}
 		cF.allInit(gap);
 		label.setText(cF.getCalText());		// 년월 글자 갱신		

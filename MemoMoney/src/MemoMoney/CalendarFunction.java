@@ -1,11 +1,19 @@
 package MemoMoney;
 
 import java.util.Calendar;
+import javax.swing.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import MemoMoney.JoinFrame.ButtonListener;
 
-public class CalendarFunction {
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+
+
+
+public class CalendarFunction extends JFrame implements ActionListener {
 	JButton[] buttons;
 	
 	ImageIcon[] dBtn = { // ImageIcon 클래스 객체 images를 배열로 선언합니다.
@@ -57,7 +65,10 @@ public class CalendarFunction {
 	Calendar cal = Calendar.getInstance();
 	int year, month;
 	
+	
+
 	public CalendarFunction() {
+		
 		year = cal.get(Calendar.YEAR);
 		month = cal.get(Calendar.MONTH) + 1;
 	}
@@ -85,6 +96,7 @@ public class CalendarFunction {
 			// buttons[0] ~ [6] : 일 ~ 토
 			// buttons[7] ~     : 날짜 출력
 			buttons[6 + firstDay + i].setIcon(dBtn[i]);
+			buttons[6 + firstDay + i].addActionListener(this);
 		}			
 		
 	}
@@ -103,6 +115,11 @@ public class CalendarFunction {
 			year++;
 			month = 1;
 		}
+		calSet();
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		calSet();
 	}		
 }
