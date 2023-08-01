@@ -114,7 +114,7 @@ public class MainFrame extends JFrame {
 					if(o.db.logincheck(uid, upass)) {	//이 부분이 데이터베이스에 접속해 로그인 정보를 확인하는 부분이다.
 						System.out.println("로그인 성공");
 						JOptionPane.showMessageDialog(null, "로그인에 성공하였습니다");
-						new Calendarmain();
+						// new Calendar_p();
 						setVisible(false);
 						
 					} else {
