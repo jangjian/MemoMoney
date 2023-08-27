@@ -24,7 +24,6 @@ public class MainFrame extends JFrame {
 	/* Button */
 	JButton loginBtn = new JButton();
 	JButton joinBtn = new JButton();
-
 	
 	/* Button Image */
 	ImageIcon loginbtn = new ImageIcon(MainFrame.class.getResource("../Image/login_btn.png"));
@@ -78,7 +77,7 @@ public class MainFrame extends JFrame {
 		p1.setLayout(null);//레이아웃 설정
 		add(p1);   
 			  
-		setSize(1280, 720);
+		setSize(1290, 750);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);

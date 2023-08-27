@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.util.Calendar;
 
 public class Calendar_p extends JFrame {
-	
 	static JPanel day = new JPanel() {
 		Image background = new ImageIcon(Calendar_p.class.getResource("../Image/Calendar_p.png")).getImage(); 
 		public void paintComponent(Graphics g) { 
@@ -71,6 +70,7 @@ public class Calendar_p extends JFrame {
 			   new ImageIcon(MainFrame.class.getResource("../Image/fr.png")),
 			   new ImageIcon(MainFrame.class.getResource("../Image/sa.png")),	
 	};
+	
 	int DATE_MONTH = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
 	int DATE_YEAR = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
 	String DATE_DAY = "";
@@ -85,8 +85,10 @@ public class Calendar_p extends JFrame {
 		container.add("North", day);
 		container.add("Center", day1);
 		
+		
 		day1.setLayout(new GridLayout(7, 7, 10, 10));
-		day1.setBorder(BorderFactory.createEmptyBorder(30,100,50,100));
+		day.setBorder(BorderFactory.createEmptyBorder(35,0,0,0));
+		day1.setBorder(BorderFactory.createEmptyBorder(50,100,50,100));
 		
 		for (int i = 0; i < dayBtn.length; i++) {
             final int selection = i;
@@ -141,7 +143,7 @@ public class Calendar_p extends JFrame {
 		day.add(nextBtn);
 		
 		setTitle("MemoMoney");
-		setSize(1280, 720);
+		setSize(1290, 750);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);
@@ -168,7 +170,6 @@ public class Calendar_p extends JFrame {
                         System.out.println("선택");
                     }
                 });
-     			
      		}	
         J_Label.setText(Simple_Date_Format.format(Calendar.getTime()));
     }
