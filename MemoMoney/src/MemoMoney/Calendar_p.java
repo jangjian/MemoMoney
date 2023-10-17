@@ -9,7 +9,7 @@ public class Calendar_p extends JFrame {
 	static JPanel day = new JPanel() {
 		Image background = new ImageIcon(Calendar_p.class.getResource("../Image/Calendar_p.png")).getImage(); 
 		public void paintComponent(Graphics g) { 
-			g.drawImage(background, 0, 0, null);
+			g.drawImage(background, 0, 0, null);    
 			setOpaque(false); 
 			super.paintComponent(g);
 		}

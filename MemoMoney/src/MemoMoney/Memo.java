@@ -14,24 +14,17 @@ public class Memo extends JFrame {
             super.paintComponent(g);
         }
     };
-
+    // km
     Memo() {
         setTitle("MemoMoney");
 
-        JPanel memo = new JPanel();
-        memo.setLayout(new BorderLayout());
-
         JTextArea textArea = new JTextArea();
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-        memo.add(textArea, BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setBounds(20,30,600,700);
+        p1.add(scrollPane);
+        scrollPane.setVisible(true);
         
-        memo.setBounds(0,0 , 650, 750);;
-
-        p1.add(memo);
-
         add(p1);
-
         setSize(1290, 750);
         setLocationRelativeTo(null);
         setVisible(true);
