@@ -7,7 +7,7 @@ public class Database {
 	Statement stmt = null;
 	String url = "jdbc:mysql://localhost/memomoney?serverTimezone=Asia/Seoul";	
 	String user = "root";
-	String passwd = "0000";	
+	String passwd = "1011";	
 
 	Database() {//데이터베이스에 연결
 		try {

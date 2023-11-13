@@ -43,12 +43,10 @@ public class Memo extends JFrame {
             textAreas[i].setFont(font);
             scrollPanes[i] = new JScrollPane(textAreas[i]);
 
-            // Set location and size for each JScrollPane
             int x = (i < 4) ? 740 : 600;
             int y = (i % 4) * 60 + 280;
             scrollPanes[i].setBounds(x, y, 500, 40);
 
-            // Customize JScrollPane appearance
             scrollPanes[i].setOpaque(false);
             scrollPanes[i].getViewport().setOpaque(false);
             scrollPanes[i].setBorder(null);

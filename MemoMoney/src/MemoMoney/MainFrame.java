@@ -26,7 +26,7 @@ public class MainFrame extends JFrame {
 	JButton joinBtn = new JButton();
 	
 	/* Button Image */
-	ImageIcon loginbtn = new ImageIcon(MainFrame.class.getResource("../Image/login_btn.png"));
+	ImageIcon login = new ImageIcon(MainFrame.class.getResource("../Image/login_btn.png"));
 	ImageIcon joinbtn = new ImageIcon(MainFrame.class.getResource("../Image/signup_btn.png"));
 	
 	
@@ -51,6 +51,7 @@ public class MainFrame extends JFrame {
 		/* TextField 추가 */
 		p1.add(id);
 		p1.add(pw);
+	
 		
 		/* Button 이벤트 리스너 추가 */
 		ButtonListener bl = new ButtonListener();
@@ -62,7 +63,7 @@ public class MainFrame extends JFrame {
 		joinBtn.setLayout(null);
 		joinBtn.setBounds(755,544,85,42);
 		
-		loginBtn.setIcon(loginbtn);	// 버튼 이미지
+		loginBtn.setIcon(login);	// 버튼 이미지
 		joinBtn.setIcon(joinbtn);
 		
 		loginBtn.setContentAreaFilled(false);	//버튼 투명하게
@@ -113,8 +114,8 @@ public class MainFrame extends JFrame {
 					if(o.db.logincheck(uid, upass)) {	//이 부분이 데이터베이스에 접속해 로그인 정보를 확인하는 부분이다.
 						System.out.println("로그인 성공");
 						JOptionPane.showMessageDialog(null, "로그인에 성공하였습니다");
-						// new Calendar_p();
-						setVisible(false);
+						 new Calendar_p();
+						 setVisible(false);
 						
 					} else {
 						System.out.println("로그인 실패 > 로그인 정보 불일치");

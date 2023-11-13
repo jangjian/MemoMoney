@@ -28,8 +28,8 @@ public class Calendar_p extends JFrame {
 	ImageIcon Btn = new ImageIcon(Calendar_p.class.getResource("../Image/Calendar_p.png"));
 	
 	ImageIcon[] dBtn = { // ImageIcon 클래스 객체 images를 배열로 선언합니다.
-			   new ImageIcon(MainFrame.class.getResource("../Image/Calendar_p.png")), // [0]
-			   new ImageIcon(MainFrame.class.getResource("../Image/001.png")),
+			   new ImageIcon(Calendar_p.class.getResource("../Image/Calendar_p.png")), // [0]
+			   new ImageIcon(Calendar_p.class.getResource("../Image/001.png")),
 			   new ImageIcon(MainFrame.class.getResource("../Image/002.png")),
 			   new ImageIcon(MainFrame.class.getResource("../Image/003.png")),
 			   new ImageIcon(MainFrame.class.getResource("../Image/004.png")),
@@ -70,7 +70,40 @@ public class Calendar_p extends JFrame {
 			   new ImageIcon(MainFrame.class.getResource("../Image/fr.png")),
 			   new ImageIcon(MainFrame.class.getResource("../Image/sa.png")),	
 	};
-	
+	ImageIcon[] cBtn = {
+//			new ImageIcon(MainFrame.class.getResource("../Image/Calendar_p.png")), 
+			new ImageIcon(Calendar_p.class.getResource("../Image/001_c.png")),
+			new ImageIcon(MainFrame.class.getResource("../Image/002_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/003_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/004_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/005_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/006_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/007_c.png")), // [0]
+			   new ImageIcon(MainFrame.class.getResource("../Image/008_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/009_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/010_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/011_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/012_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/013_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/014_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/015_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/016_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/017_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/018_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/019_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/020_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/021_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/022_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/023_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/024_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/025_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/026_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/027_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/028_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/029_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/030_c.png")),
+			   new ImageIcon(MainFrame.class.getResource("../Image/031_c.png")),
+	};
 	int DATE_MONTH = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
 	int DATE_YEAR = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
 	String DATE_DAY = "";
@@ -118,6 +151,37 @@ public class Calendar_p extends JFrame {
 	            allInit();
 	        }
 	    });
+		for (int i = 7; i < dayBtn.length; i++) {
+		    final int dayOfMonth = i - 6 - (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1);
+
+		    // Check if the button corresponds to a valid day of the month
+		    if (dayOfMonth > 0 && dayOfMonth <= Calendar.getInstance().getActualMaximum(Calendar.DATE)) {
+		        final JButton button = dayBtn[i]; // dayBtn[i]를 final 변수로 복사
+		        final int dayOfMonthCopy = dayOfMonth; // dayOfMonth를 복사
+
+		        button.addMouseListener(new MouseAdapter() {
+		            public void mouseEntered(MouseEvent e) {
+		                button.setIcon(cBtn[dayOfMonthCopy-3]);
+		            }
+		        });
+		        button.addMouseListener(new MouseAdapter() {
+		            public void mouseExited(MouseEvent e) {
+		                button.setIcon(dBtn[dayOfMonthCopy-2]);
+		            }
+		        });
+
+		        button.addActionListener(new ActionListener() {
+		            public void actionPerformed(ActionEvent ae) {
+		                DATE_DAY = String.valueOf(dayOfMonthCopy);
+		                System.out.println("선택된 날짜: " + Set_Picked_Date());
+		                new Memo();
+		                setVisible(false);
+		            }
+		        });
+
+		    }
+		}
+    
 		
 		Font font = new Font("SansSerif", Font.BOLD, 35);
 		J_Label.setFont(font);
@@ -150,29 +214,31 @@ public class Calendar_p extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	public void Display_Date() {
-        for (int i = 7; i < dayBtn.length; i++)
-            dayBtn[i].setText("");
-        java.text.SimpleDateFormat Simple_Date_Format = new java.text.SimpleDateFormat(
-                "MMMM yyyy");
-        java.util.Calendar Calendar = java.util.Calendar.getInstance();
-        Calendar.set(DATE_YEAR, DATE_MONTH, 1);
-     // 그 달의 1일 요일 수
-     		int firstDay = Calendar.get(Calendar.DAY_OF_WEEK);
-     		// 요일 수 1일 시작, 배열 0부터 시작
-     		firstDay--;
-     		
-     		for(int i = 1; i <= Calendar.getActualMaximum(Calendar.DATE); i++) {
-     			// buttons[0] ~ [6] : 일 ~ 토
-     			// buttons[7] ~     : 날짜 출력
-     			dayBtn[6 + firstDay + i].setIcon(dBtn[i]);
-     			dayBtn[6 + firstDay + i].addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent ae) {
-                        System.out.println("선택");
-                    }
-                });
-     		}	
-        J_Label.setText(Simple_Date_Format.format(Calendar.getTime()));
-    }
+	    for (int i = 7; i < dayBtn.length; i++)
+	        dayBtn[i].setText("");
+	    java.text.SimpleDateFormat Simple_Date_Format = new java.text.SimpleDateFormat(
+	            "MMMM yyyy");
+	    java.util.Calendar Calendar = java.util.Calendar.getInstance();
+	    Calendar.set(DATE_YEAR, DATE_MONTH, 1);
+	    // 그 달의 1일 요일 수
+	    int firstDay = Calendar.get(Calendar.DAY_OF_WEEK);
+	    // 요일 수 1일 시작, 배열 0부터 시작
+	    firstDay--;
+
+	    for(int i = 1; i <= Calendar.getActualMaximum(Calendar.DATE); i++) {
+	        // buttons[0] ~ [6] : 일 ~ 토
+	        // buttons[7] ~     : 날짜 출력
+	        dayBtn[6 + firstDay + i].setIcon(dBtn[i]);
+	        dayBtn[6 + firstDay + i].addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent ae) {
+	                System.out.println("선택");
+//	                System.out.println("선택된 날짜: " + Set_Picked_Date());
+	            }
+	        });
+	    }
+	    J_Label.setText(Simple_Date_Format.format(Calendar.getTime()));
+	}
+
 
 	public String Set_Picked_Date() {
 	        if (DATE_DAY.equals(""))
@@ -180,7 +246,7 @@ public class Calendar_p extends JFrame {
 	        java.text.SimpleDateFormat Simple_Date_Format = new java.text.SimpleDateFormat(
 	                "dd-MM-yyyy");
 	        java.util.Calendar Calendar = java.util.Calendar.getInstance();
-	        Calendar.set(DATE_YEAR, DATE_MONTH, Integer.parseInt(DATE_DAY));
+	        Calendar.set(DATE_YEAR, DATE_MONTH, Integer.parseInt(DATE_DAY)-2);
 	        return Simple_Date_Format.format(Calendar.getTime());
 	}
 	public void allInit() {
