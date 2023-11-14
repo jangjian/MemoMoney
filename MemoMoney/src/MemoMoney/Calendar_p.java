@@ -27,7 +27,7 @@ public class Calendar_p extends JFrame {
 	ImageIcon aBtn = new ImageIcon(Calendar_p.class.getResource("../Image/after.png"));
 	ImageIcon Btn = new ImageIcon(Calendar_p.class.getResource("../Image/Calendar_p.png"));
 	
-	ImageIcon[] dBtn = { // ImageIcon 클래스 객체 images를 배열로 선언합니다.
+	ImageIcon[] dBtn = { 
 			   new ImageIcon(Calendar_p.class.getResource("../Image/Calendar_p.png")), // [0]
 			   new ImageIcon(Calendar_p.class.getResource("../Image/001.png")),
 			   new ImageIcon(MainFrame.class.getResource("../Image/002.png")),
@@ -61,6 +61,7 @@ public class Calendar_p extends JFrame {
 			   new ImageIcon(MainFrame.class.getResource("../Image/030.png")),
 			   new ImageIcon(MainFrame.class.getResource("../Image/031.png")),
 			 };
+	
 	ImageIcon[] wBtn = {
 			   new ImageIcon(MainFrame.class.getResource("../Image/su.png")),
 			   new ImageIcon(MainFrame.class.getResource("../Image/mo.png")),
@@ -70,6 +71,7 @@ public class Calendar_p extends JFrame {
 			   new ImageIcon(MainFrame.class.getResource("../Image/fr.png")),
 			   new ImageIcon(MainFrame.class.getResource("../Image/sa.png")),	
 	};
+	
 	ImageIcon[] cBtn = {
 			new ImageIcon(MainFrame.class.getResource("../Image/Calendar_p.png")), 
 			new ImageIcon(Calendar_p.class.getResource("../Image/001_c.png")),
@@ -104,6 +106,7 @@ public class Calendar_p extends JFrame {
 			   new ImageIcon(MainFrame.class.getResource("../Image/030_c.png")),
 			   new ImageIcon(MainFrame.class.getResource("../Image/031_c.png")),
 	};
+	
 	int DATE_MONTH = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
 	int DATE_YEAR = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
 	String DATE_DAY = "";
@@ -246,7 +249,7 @@ public class Calendar_p extends JFrame {
 	        java.text.SimpleDateFormat Simple_Date_Format = new java.text.SimpleDateFormat(
 	                "yyyy년 MM월 dd일");
 	        java.util.Calendar Calendar = java.util.Calendar.getInstance();
-	        Calendar.set(DATE_YEAR, DATE_MONTH, Integer.parseInt(DATE_DAY));
+	        Calendar.set(DATE_YEAR, DATE_MONTH, Integer.parseInt(DATE_DAY)-1);
 	        return Simple_Date_Format.format(Calendar.getTime());
 	}
 	public void allInit() {

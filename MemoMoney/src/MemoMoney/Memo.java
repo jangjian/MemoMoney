@@ -1,4 +1,5 @@
 package MemoMoney;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -38,15 +39,23 @@ public class Memo extends JFrame {
     /*저장버튼*/
     JButton saveButton = new JButton("");
     
+    /*뒤로가기 버튼*/
+    JButton backButton = new JButton("");
+    
     /*날짜 라벨*/
     JLabel selectedDateLabel = new JLabel(); // 라벨 추가
+    
+    private String selectedDate; // 새로운 멤버 변수 추가
 
 
     Memo(String selectedDate) {
         setTitle("MemoMoney");
-
         
+        this.selectedDate = selectedDate; // 전달받은 날짜를 저장
+
         Font font = new Font("나눔손글씨 장미체", Font.PLAIN, 30);
+        Font font1 = new Font("나눔손글씨 장미체", Font.PLAIN, 30);
+        Color font1Color = Color.WHITE; // 폰트 색을 하얀색으로 설정
         textArea.setFont(font);
         
         /*저장버튼*/
@@ -61,9 +70,22 @@ public class Memo extends JFrame {
         saveButton.setContentAreaFilled(false);    //saveButton 배경 투명화
         saveButton.setBorderPainted(false);         //saveButton 테두리 투명화
         
+        /*뒤로가기 버튼*/
+        backButton.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+              new Calendar_p();
+              setVisible(false);
+           }
+        });
+        backButton.setBounds(20, 20, 40, 40);     //saveButton 위치 설정
+        backButton.setContentAreaFilled(false);    //saveButton 배경 투명화
+        backButton.setBorderPainted(false);         //saveButton 테두리 투명화
+        
         // 라벨 초기화
-        selectedDateLabel.setFont(font);
-        selectedDateLabel.setBounds(50, 20, 400, 40);
+        selectedDateLabel.setFont(font1);
+        selectedDateLabel.setForeground(font1Color);
+        selectedDateLabel.setBounds(65, 16, 400, 40);
         p1.add(selectedDateLabel);
 
         // 날짜 설정
@@ -75,6 +97,7 @@ public class Memo extends JFrame {
         p1.setLayout(null);
         p1.add(scrollPane);
         p1.add(saveButton);
+        p1.add(backButton);
 
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);    // 가로 스크롤 X
         scrollPane.setBounds(45, 185, 505, 480);
@@ -159,37 +182,37 @@ public class Memo extends JFrame {
 
     private void saveText1() {
         try {
-           String directoryPath = "C:/eclipse/MemoMoney/";
-           File directory = new File(directoryPath);
-           if (!directory.exists()) {
-               directory.mkdirs();
-           }
-           String memoFilePath = directoryPath + "Memo0.txt";
-           FileWriter writer = new FileWriter(memoFilePath);
-             writer.write(textArea.getText());
-             writer.close();
-        } catch (IOException e) {
-           e.printStackTrace();
-        }
-     }
-      
-      private void saveText2() {
-         try {
-            for(int i = 0; i < 4; i++) {
-               String directoryPath = "C:/eclipse/MemoMoney/";
-               File directory = new File(directoryPath);
-               if (!directory.exists()) {
-                   directory.mkdirs();
-               }
-               String memoFilePath = directoryPath + "Memo" + (i + 1) + ".txt";
-               FileWriter writer = new FileWriter(memoFilePath);
-               writer.write(textAreas[i].getText());
-               writer.close();
+            String directoryPath = "C:/eclipse/MemoMoney/";
+            File directory = new File(directoryPath);
+            if (!directory.exists()) {
+                directory.mkdirs();
             }
-         } catch (IOException e) {
+            String memoFilePath = directoryPath + "Memo_" + selectedDate + ".txt";
+            FileWriter writer = new FileWriter(memoFilePath);
+            writer.write(textArea.getText());
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
-         }
-      }
+        }
+    }
+
+    private void saveText2() {
+        try {
+            for (int i = 0; i < 4; i++) {
+                String directoryPath = "C:/eclipse/MemoMoney/";
+                File directory = new File(directoryPath);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                String memoFilePath = directoryPath + "Memo_" + selectedDate + "_" + (i + 1) + ".txt";
+                FileWriter writer = new FileWriter(memoFilePath);
+                writer.write(textAreas[i].getText());
+                writer.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void displaySum(int sum) {
         sumLabel.setText(sum + "원");
