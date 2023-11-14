@@ -71,7 +71,7 @@ public class Calendar_p extends JFrame {
 			   new ImageIcon(MainFrame.class.getResource("../Image/sa.png")),	
 	};
 	ImageIcon[] cBtn = {
-//			new ImageIcon(MainFrame.class.getResource("../Image/Calendar_p.png")), 
+			new ImageIcon(MainFrame.class.getResource("../Image/Calendar_p.png")), 
 			new ImageIcon(Calendar_p.class.getResource("../Image/001_c.png")),
 			new ImageIcon(MainFrame.class.getResource("../Image/002_c.png")),
 			   new ImageIcon(MainFrame.class.getResource("../Image/003_c.png")),
@@ -161,20 +161,21 @@ public class Calendar_p extends JFrame {
 
 		        button.addMouseListener(new MouseAdapter() {
 		            public void mouseEntered(MouseEvent e) {
-		                button.setIcon(cBtn[dayOfMonthCopy-3]);
+		                button.setIcon(cBtn[dayOfMonthCopy-1]);
 		            }
 		        });
 		        button.addMouseListener(new MouseAdapter() {
 		            public void mouseExited(MouseEvent e) {
-		                button.setIcon(dBtn[dayOfMonthCopy-2]);
+		                button.setIcon(dBtn[dayOfMonthCopy-1]);
 		            }
 		        });
 
 		        button.addActionListener(new ActionListener() {
 		            public void actionPerformed(ActionEvent ae) {
 		                DATE_DAY = String.valueOf(dayOfMonthCopy);
-		                System.out.println("선택된 날짜: " + Set_Picked_Date());
-		                new Memo();
+		                String selectedDate = Set_Picked_Date();
+		                System.out.println("선택된 날짜: " + selectedDate);
+		                new Memo(selectedDate); // 선택된 날짜를 Memo 클래스의 생성자에 전달
 		                setVisible(false);
 		            }
 		        });
@@ -232,7 +233,6 @@ public class Calendar_p extends JFrame {
 	        dayBtn[6 + firstDay + i].addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent ae) {
 	                System.out.println("선택");
-//	                System.out.println("선택된 날짜: " + Set_Picked_Date());
 	            }
 	        });
 	    }
@@ -244,9 +244,9 @@ public class Calendar_p extends JFrame {
 	        if (DATE_DAY.equals(""))
 	            return DATE_DAY;
 	        java.text.SimpleDateFormat Simple_Date_Format = new java.text.SimpleDateFormat(
-	                "dd-MM-yyyy");
+	                "yyyy년 MM월 dd일");
 	        java.util.Calendar Calendar = java.util.Calendar.getInstance();
-	        Calendar.set(DATE_YEAR, DATE_MONTH, Integer.parseInt(DATE_DAY)-2);
+	        Calendar.set(DATE_YEAR, DATE_MONTH, Integer.parseInt(DATE_DAY));
 	        return Simple_Date_Format.format(Calendar.getTime());
 	}
 	public void allInit() {
