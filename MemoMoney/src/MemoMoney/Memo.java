@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -27,61 +28,60 @@ public class Memo extends JFrame {
             super.paintComponent(g);
         }
     };
-    
+
     /*소비내역*/
     private JTextArea[] textAreas = new JTextArea[4];
     private JLabel sumLabel = new JLabel();
-    
+
     /*일기장*/
     JTextArea textArea = new JTextArea();
     JScrollPane scrollPane = new JScrollPane(textArea);
-    
+
     /*저장버튼*/
     JButton saveButton = new JButton("");
-    
+
     /*뒤로가기 버튼*/
     JButton backButton = new JButton("");
-    
+
     /*날짜 라벨*/
     JLabel selectedDateLabel = new JLabel(); // 라벨 추가
-    
-    private String selectedDate; // 새로운 멤버 변수 추가
 
+    private String selectedDate; // 새로운 멤버 변수 추가
 
     Memo(String selectedDate) {
         setTitle("MemoMoney");
-        
+
         this.selectedDate = selectedDate; // 전달받은 날짜를 저장
 
         Font font = new Font("나눔손글씨 장미체", Font.PLAIN, 30);
         Font font1 = new Font("나눔손글씨 장미체", Font.PLAIN, 30);
         Color font1Color = Color.WHITE; // 폰트 색을 하얀색으로 설정
         textArea.setFont(font);
-        
+
         /*저장버튼*/
         saveButton.addActionListener(new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
-              saveText1();
-              saveText2();
-           }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveText1();
+                saveText2();
+            }
         });
         saveButton.setBounds(1205, 20, 40, 40);     //saveButton 위치 설정
         saveButton.setContentAreaFilled(false);    //saveButton 배경 투명화
         saveButton.setBorderPainted(false);         //saveButton 테두리 투명화
-        
+
         /*뒤로가기 버튼*/
         backButton.addActionListener(new ActionListener() {
-           @Override
-           public void actionPerformed(ActionEvent e) {
-              new Calendar_p();
-              setVisible(false);
-           }
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Calendar_p();
+                setVisible(false);
+            }
         });
         backButton.setBounds(20, 20, 40, 40);     //saveButton 위치 설정
         backButton.setContentAreaFilled(false);    //saveButton 배경 투명화
         backButton.setBorderPainted(false);         //saveButton 테두리 투명화
-        
+
         // 라벨 초기화
         selectedDateLabel.setFont(font1);
         selectedDateLabel.setForeground(font1Color);
@@ -93,6 +93,8 @@ public class Memo extends JFrame {
             selectedDateLabel.setText(selectedDate);
         }
 
+     // 선택된 날짜에 대한 기존 메모 불러오기
+//        loadMemos(selectedDate);
 
         p1.setLayout(null);
         p1.add(scrollPane);
@@ -112,8 +114,8 @@ public class Memo extends JFrame {
             textAreas[i] = new JTextArea();
             textAreas[i].setFont(font);
 
-            int x = (i < 4) ? 740 : 600;
-            int y = (i % 4) * 60 + 280;
+            int x = (i < 2) ? 740 : 600; // 수정된 부분
+            int y = (i % 2) * 60 + 280;   // 수정된 부분
             textAreas[i].setBounds(x, y, 500, 40);
 
             textAreas[i].setOpaque(false);
@@ -180,10 +182,45 @@ public class Memo extends JFrame {
         return sum;
     }
 
+    // 파일에서 메모를 불러오는 메소드
+//    void loadMemos(String selectedDate) {
+//        try {
+//            File memoFile = new File("C:/eclipse/MemoMoney/Memo_" + selectedDate + ".txt");
+//            if (memoFile.exists()) {
+//                BufferedReader reader = new BufferedReader(new FileReader(memoFile));
+//                StringBuilder memoContent = new StringBuilder();
+//                String line;
+//                while ((line = reader.readLine()) != null) {
+//                    memoContent.append(line).append("\n");
+//                }
+//                textArea.setText(memoContent.toString());
+//                reader.close();
+//            }
+//
+//            for (int i = 0; i < 4; i++) {
+//                memoFile = new File("C:/eclipse/MemoMoney/Memo_" + selectedDate + "_" + (i + 1) + ".txt");
+//                if (memoFile.exists()) {
+//                    BufferedReader reader = new BufferedReader(new FileReader(memoFile));
+//                    StringBuilder memoContent = new StringBuilder();
+//                    String line;
+//                    while ((line = reader.readLine()) != null) {
+//                        memoContent.append(line).append("\n");
+//                    }
+//                    textAreas[i].setText(memoContent.toString());
+//                    reader.close();
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
     private void saveText1() {
         try {
             String directoryPath = "C:/eclipse/MemoMoney/";
             File directory = new File(directoryPath);
+            JOptionPane.showMessageDialog(null, "성공적으로 저장하였습니다.", "MemoMoney", JOptionPane.ERROR_MESSAGE);
             if (!directory.exists()) {
                 directory.mkdirs();
             }

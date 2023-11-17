@@ -178,10 +178,16 @@ public class Calendar_p extends JFrame {
 		                DATE_DAY = String.valueOf(dayOfMonthCopy);
 		                String selectedDate = Set_Picked_Date();
 		                System.out.println("선택된 날짜: " + selectedDate);
-		                new Memo(selectedDate); // 선택된 날짜를 Memo 클래스의 생성자에 전달
+
+		                // 선택된 날짜에 해당하는 Memo 인스턴스 생성
+		                Memo memoPage = new Memo(selectedDate);
+		                // 선택된 날짜에 대한 기존 메모 불러오기
+//		                memoPage.loadMemos(selectedDate);
+
 		                setVisible(false);
 		            }
 		        });
+
 
 		    }
 		}
