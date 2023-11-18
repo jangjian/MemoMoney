@@ -6,8 +6,10 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
 
 public class Memo extends JFrame {
     static JPanel p1 = new JPanel() {
@@ -78,9 +81,9 @@ public class Memo extends JFrame {
                 setVisible(false);
             }
         });
-        backButton.setBounds(20, 20, 40, 40);     //saveButton 위치 설정
-        backButton.setContentAreaFilled(false);    //saveButton 배경 투명화
-        backButton.setBorderPainted(false);         //saveButton 테두리 투명화
+        backButton.setBounds(20, 20, 40, 40);     //backButton 위치 설정
+        backButton.setContentAreaFilled(false);    //backButton 배경 투명화
+        backButton.setBorderPainted(false);         //backButton 테두리 투명화
 
         // 라벨 초기화
         selectedDateLabel.setFont(font1);
@@ -94,7 +97,8 @@ public class Memo extends JFrame {
         }
 
      // 선택된 날짜에 대한 기존 메모 불러오기
-//        loadMemos(selectedDate);
+        loadMemos(selectedDate);
+        
 
         p1.setLayout(null);
         p1.add(scrollPane);
@@ -114,11 +118,11 @@ public class Memo extends JFrame {
             textAreas[i] = new JTextArea();
             textAreas[i].setFont(font);
 
-            int x = (i < 2) ? 740 : 600; // 수정된 부분
-            int y = (i % 2) * 60 + 280;   // 수정된 부분
+            int x = (i < 4) ? 740 : 600; 
+            int y = (i % 4) * 60 + 280;   
             textAreas[i].setBounds(x, y, 500, 40);
 
-            textAreas[i].setOpaque(false);
+            textAreas[i].setOpaque(false);	
             textAreas[i].setBorder(null);
             textAreas[i].setOpaque(false);
 
@@ -183,37 +187,39 @@ public class Memo extends JFrame {
     }
 
     // 파일에서 메모를 불러오는 메소드
-//    void loadMemos(String selectedDate) {
-//        try {
-//            File memoFile = new File("C:/eclipse/MemoMoney/Memo_" + selectedDate + ".txt");
-//            if (memoFile.exists()) {
-//                BufferedReader reader = new BufferedReader(new FileReader(memoFile));
-//                StringBuilder memoContent = new StringBuilder();
-//                String line;
-//                while ((line = reader.readLine()) != null) {
-//                    memoContent.append(line).append("\n");
-//                }
-//                textArea.setText(memoContent.toString());
-//                reader.close();
-//            }
-//
-//            for (int i = 0; i < 4; i++) {
-//                memoFile = new File("C:/eclipse/MemoMoney/Memo_" + selectedDate + "_" + (i + 1) + ".txt");
-//                if (memoFile.exists()) {
-//                    BufferedReader reader = new BufferedReader(new FileReader(memoFile));
-//                    StringBuilder memoContent = new StringBuilder();
-//                    String line;
-//                    while ((line = reader.readLine()) != null) {
-//                        memoContent.append(line).append("\n");
-//                    }
-//                    textAreas[i].setText(memoContent.toString());
-//                    reader.close();
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    void loadMemos(String selectedDate) {
+        try {
+            File memoFile = new File("C:/eclipse/MemoMoney/Memo_" + selectedDate + ".txt");
+            if (memoFile.exists()) {
+                BufferedReader reader = new BufferedReader(new FileReader(memoFile));
+                StringBuilder memoContent = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    memoContent.append(line).append("\n");
+                }
+                textArea.setText(memoContent.toString());
+                reader.close();
+            }
+
+            for (int i = 0; i < 4; i++) {
+            	if (textAreas[i] != null) {
+                memoFile = new File("C:/eclipse/MemoMoney/Memo_" + selectedDate + "_" + (i + 1) + ".txt");
+                if (memoFile.exists()) {
+                    BufferedReader reader = new BufferedReader(new FileReader(memoFile));
+                    StringBuilder memoContent = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        memoContent.append(line).append("\n");
+                    }
+                    textAreas[i].setText(memoContent.toString());
+                    reader.close();
+                	} 
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private void saveText1() {
