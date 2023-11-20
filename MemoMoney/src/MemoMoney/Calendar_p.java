@@ -155,44 +155,38 @@ public class Calendar_p extends JFrame {
 	        }
 	    });
 		for (int i = 7; i < dayBtn.length; i++) {
-		    final int dayOfMonth = i - 6 - (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1);
+	        final int dayOfMonth = i - 6 - (Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1);
 
-		    // Check if the button corresponds to a valid day of the month
-		    if (dayOfMonth > 0 && dayOfMonth <= Calendar.getInstance().getActualMaximum(Calendar.DATE)) {
-		        final JButton button = dayBtn[i]; // dayBtn[i]를 final 변수로 복사
-		        final int dayOfMonthCopy = dayOfMonth; // dayOfMonth를 복사
+	        if (dayOfMonth > 0 && dayOfMonth <= Calendar.getInstance().getActualMaximum(Calendar.DATE)) {
+	            final JButton button = dayBtn[i]; // dayBtn[i]를 final 변수로 복사
+	            final int dayOfMonthCopy = dayOfMonth; // dayOfMonth를 복사
 
-		        button.addMouseListener(new MouseAdapter() {
-		            public void mouseEntered(MouseEvent e) {
-		                button.setIcon(cBtn[dayOfMonthCopy-1]);
-		            }
-		        });
-		        button.addMouseListener(new MouseAdapter() {
-		            public void mouseExited(MouseEvent e) {
-		                button.setIcon(dBtn[dayOfMonthCopy-1]);
-		            }
-		        });
+	            button.addMouseListener(new MouseAdapter() {
+	                public void mouseEntered(MouseEvent e) {
+	                    button.setIcon(cBtn[dayOfMonthCopy - 2]);
+	                }
+	            });
+	            button.addMouseListener(new MouseAdapter() {
+	                public void mouseExited(MouseEvent e) {
+	                    button.setIcon(dBtn[dayOfMonthCopy - 2]);
+	                }
+	            });
 
-		        button.addActionListener(new ActionListener() {
-		            public void actionPerformed(ActionEvent ae) {
-		                DATE_DAY = String.valueOf(dayOfMonthCopy);
-		                String selectedDate = Set_Picked_Date();
-		                System.out.println("선택된 날짜: " + selectedDate);
+	            button.addActionListener(new ActionListener() {
+	                public void actionPerformed(ActionEvent ae) {
+	                    DATE_DAY = String.valueOf(dayOfMonthCopy);
+	                    String selectedDate = Set_Picked_Date();
+	                    System.out.println("선택된 날짜: " + selectedDate);
 
-		                // 선택된 날짜에 해당하는 Memo 인스턴스 생성
-		                Memo memoPage = new Memo(selectedDate);
-		                // 선택된 날짜에 대한 기존 메모 불러오기
-//		                memoPage.loadMemos(selectedDate);
-
-		                setVisible(false);
-		            }
-		        });
-
-
-		    }
-		}
-    
+	                    // 선택된 날짜에 해당하는 Memo 인스턴스 생성
+	                    Memo memoPage = new Memo(selectedDate, Calendar_p.this);
+	                    setVisible(false);
+	                }
+	            });
+	        }
+	    }
 		
+    
 		Font font = new Font("SansSerif", Font.BOLD, 35);
 		J_Label.setFont(font);
 		
@@ -223,6 +217,7 @@ public class Calendar_p extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
 	public void Display_Date() {
 	    for (int i = 7; i < dayBtn.length; i++)
 	        dayBtn[i].setText("");
@@ -255,7 +250,7 @@ public class Calendar_p extends JFrame {
 	        java.text.SimpleDateFormat Simple_Date_Format = new java.text.SimpleDateFormat(
 	                "yyyy년 MM월 dd일");
 	        java.util.Calendar Calendar = java.util.Calendar.getInstance();
-	        Calendar.set(DATE_YEAR, DATE_MONTH, Integer.parseInt(DATE_DAY)-1);
+	        Calendar.set(DATE_YEAR, DATE_MONTH, Integer.parseInt(DATE_DAY)-2);
 	        return Simple_Date_Format.format(Calendar.getTime());
 	}
 	public void allInit() {

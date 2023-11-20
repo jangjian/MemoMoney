@@ -47,14 +47,18 @@ public class Memo extends JFrame {
     JButton backButton = new JButton("");
 
     /*날짜 라벨*/
-    JLabel selectedDateLabel = new JLabel(); // 라벨 추가
+    private static JLabel selectedDateLabel = new JLabel(); // 라벨 추가
 
     private String selectedDate; // 새로운 멤버 변수 추가
+    
+    
+    
 
-    Memo(String selectedDate) {
+    Memo(String selectedDate, Calendar_p calendarPage) {
         setTitle("MemoMoney");
 
         this.selectedDate = selectedDate; // 전달받은 날짜를 저장
+        
 
         Font font = new Font("나눔손글씨 장미체", Font.PLAIN, 30);
         Font font1 = new Font("나눔손글씨 장미체", Font.PLAIN, 30);
@@ -73,27 +77,34 @@ public class Memo extends JFrame {
         saveButton.setContentAreaFilled(false);    //saveButton 배경 투명화
         saveButton.setBorderPainted(false);         //saveButton 테두리 투명화
 
-        /*뒤로가기 버튼*/
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Calendar_p();
-                setVisible(false);
+                calendarPage.setVisible(true); // 기존의 Calendar_p 인스턴스를 다시 보이도록 설정
+                setVisible(false); // 현재 Memo 창을 감추기
             }
         });
         backButton.setBounds(20, 20, 40, 40);     //backButton 위치 설정
         backButton.setContentAreaFilled(false);    //backButton 배경 투명화
         backButton.setBorderPainted(false);         //backButton 테두리 투명화
 
-        // 라벨 초기화
+     // 기존에 추가된 라벨이 있다면 제거
+        if (selectedDateLabel != null) {
+            p1.remove(selectedDateLabel);
+        }
+
+        // 새로운 라벨 초기화
+        selectedDateLabel = new JLabel();
         selectedDateLabel.setFont(font1);
         selectedDateLabel.setForeground(font1Color);
         selectedDateLabel.setBounds(65, 16, 400, 40);
         p1.add(selectedDateLabel);
 
+
         // 날짜 설정
         if (!selectedDate.isEmpty()) {
             selectedDateLabel.setText(selectedDate);
+            loadMemos(selectedDate); // 선택된 날짜에 대한 기존 메모 불러오기
         }
 
      // 선택된 날짜에 대한 기존 메모 불러오기
@@ -265,6 +276,6 @@ public class Memo extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Memo("");
+        new Memo("", null);
     }
 }
