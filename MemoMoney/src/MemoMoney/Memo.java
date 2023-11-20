@@ -51,6 +51,8 @@ public class Memo extends JFrame {
 
     private String selectedDate; // 새로운 멤버 변수 추가
     
+    private String sumResultText = "";	// "
+    
     
     
 
@@ -176,6 +178,7 @@ public class Memo extends JFrame {
     private void updateSum() {
         int sum = calculateSum();
         displaySum(sum);
+        sumResult(sum);
     }
 
     private int calculateSum() {
@@ -273,6 +276,32 @@ public class Memo extends JFrame {
 
         revalidate();
         repaint();
+    }
+    
+    private void sumResult (int sum) {
+    	if(sum <= 15000) {
+    		 sumResultText = "이렇게만 하면 내가 곧 석유부자!!";
+    	}
+    	else if(sum > 15000 && sum <= 30000 ){
+    		sumResultText ="그래.. '가끔'은 플렉스 해줘야지..^^;";
+    	}
+    	else if (sum > 30000 && sum <= 50000 ) {
+    		sumResultText = "....이제 좀 자제하자..";
+    	}
+    	else {
+    		sumResultText = "혹시.. 장래희망이 거지는 아니지..?";
+    	}
+    	repaint();
+    }
+    
+    @Override
+    public void paint(Graphics g) {
+    	super.paint(g);
+    	
+    	 Font font = new Font("나눔손글씨 장미체", Font.PLAIN, 30);
+         g.setFont(font);
+         
+    	g.drawString(sumResultText, 610, 690);
     }
 
     public static void main(String[] args) {
